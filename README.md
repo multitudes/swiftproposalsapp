@@ -1,2 +1,2 @@
-# swiftproposalsapp
-small app for looking up Swift evolution proposals.
+# Swift Proposals 
+Small app for looking up Swift evolution proposals.
