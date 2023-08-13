@@ -21,7 +21,9 @@ let jsonDecoder: JSONDecoder = {
 //}
 //var id: Identifier<Self> = Identifier(id: UUID())`
 
-
+struct ProposalResponse: Codable {
+    let results: [Proposal]
+}
 
 struct Proposal: Codable, Equatable, Identifiable {
     let id: String
@@ -49,12 +51,13 @@ struct Proposal: Codable, Equatable, Identifiable {
     let warnings: [Warning]
 }
 
-
+//MARK: - Profile
 struct Profile: Codable, Equatable {
     let link: String // ex = "https:\/\/github.com\/DougGregor"
     let name: String
 }
 
+//MARK - Status
 struct Status: Codable, Equatable {
     let state: String  //".implemented",
     let version: String
@@ -64,6 +67,7 @@ enum State: String, Codable {
     case implemented
 }
 
+//MARK - Assignee
 struct Assignee: Codable, Equatable {
     let assignee: String
     let id: String
@@ -75,6 +79,7 @@ struct Assignee: Codable, Equatable {
     let updated: String
 }
 
+//MARK - Warning
 struct Warning: Codable, Equatable {
     let kind: String
     let message: String // "Missing review manager.",
