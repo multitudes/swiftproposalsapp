@@ -21,34 +21,26 @@ let jsonDecoder: JSONDecoder = {
 //}
 //var id: Identifier<Self> = Identifier(id: UUID())`
 
-struct ProposalResponse: Codable {
-    let results: [Proposal]
-}
 
 struct Proposal: Codable, Equatable, Identifiable {
+    static let dataURL = URL(string: "https://download.swift.org/swift-evolution/proposals.json")
+    
     let id: String
     let authors: [Profile]
-    
-    let link: String//"0001-keywords-as-argument-labels.md",
-    let reviewManager: [Profile] // {      "link" "name" }
-    let sha: String //"cd0c7279af644b38860afaa6e0dba74a1d82107a"
-    let status: Status //
-      
-    let summary: String // "Argument labels are an important part of the interface of a Swift function,\ndescribing what particular arguments to the function do and improving\nreadability. Sometimes, the most natural label for an argument coincides with a\nlanguage keyword, such as `in`, `repeat`, or `defer`. Such keywords should be\nallowed as argument labels, allowing better expression of these interfaces.\n",
-    let title: String // " Allow (most) keywords as argument labels\n",
-    let trackingBugs: [Assignee]
-//      {
-//        "assignee" : "",
-//        "id" : "SR-344",
-//        "link" : "https:\/\/bugs.swift.org\/browse\/SR-344",
-//        "radar" : "",
-//        "resolution" : "",
-//        "status" : "",
-//        "title" : "",
-//        "updated" : ""
-//      }
-//    ],
-    let warnings: [Warning]
+
+    var title: String
+    var link: String
+    var status: Status
+
+    struct Status: Codable, Equatable {
+        var state: String
+        let version: String?
+    }
+    let reviewManager: Profile
+    let sha: String
+    let summary: String
+    let trackingBugs: [Assignee]?
+    let warnings: [Warning]?
 }
 
 //MARK: - Profile
