@@ -1,4 +1,4 @@
 # swiftproposalsapp
 small app for looking up Swift evolution proposals.
 
-![Simulator Screenshot - iPhone 14 Pro](Simulator Screenshot - iPhone 14 Pro.png)
+![Simulator Screenshot - iPhone 14 Pro](screenshots/SimulatorScreenshotiPhone14Pro.png)
