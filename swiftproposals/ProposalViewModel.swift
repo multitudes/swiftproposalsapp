@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 final class ProposalViewModel: ObservableObject {
-    @Published var proposals: [Proposal] = []
+    @Published var proposals: [ProposalDTO] = []
     
     var cancellables = Set<AnyCancellable>()
     

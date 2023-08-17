@@ -5,7 +5,10 @@
 //  Created by Laurent B on 13/08/2023.
 //
 
+
 import Foundation
+
+
 
 let jsonDecoder: JSONDecoder = {
     let decoder = JSONDecoder()
@@ -13,7 +16,8 @@ let jsonDecoder: JSONDecoder = {
     return decoder
 }()
 
-// MARK: - Proposals
+// MARK: - Proposal Data Transfer Object
+// This is modeled upon the response from the site API
 
 // this would have been a good idea but it is not decodable so I will use later if I wnt to decouple the model from the viewmodel
 //struct Identifier<Holder>: Decodable, Equatable, Identifiable {
@@ -22,11 +26,11 @@ let jsonDecoder: JSONDecoder = {
 //var id: Identifier<Self> = Identifier(id: UUID())`
 
 
-struct Proposal: Codable, Equatable, Identifiable {
+struct ProposalDTO: Codable, Equatable, Identifiable {
     static let dataURL = URL(string: "https://download.swift.org/swift-evolution/proposals.json")
     
     let id: String
-    let authors: [Profile]
+    let authors: [ProfileDTO]
 
     var title: String
     var link: String
@@ -36,31 +40,32 @@ struct Proposal: Codable, Equatable, Identifiable {
         var state: String
         let version: String?
     }
-    let reviewManager: Profile
+	
+    let reviewManager: ProfileDTO
     let sha: String
     let summary: String
-    let trackingBugs: [Assignee]?
-    let warnings: [Warning]?
+    let trackingBugs: [AssigneeDTO]?
+    let warnings: [WarningDTO]?
 }
 
 //MARK: - Profile
-struct Profile: Codable, Equatable {
+struct ProfileDTO: Codable, Equatable {
     let link: String // ex = "https:\/\/github.com\/DougGregor"
     let name: String
 }
 
-//MARK - Status
-struct Status: Codable, Equatable {
+//MARK: - Status
+struct StatusDTO: Codable, Equatable {
     let state: String  //".implemented",
     let version: String
 }
 // for later
-enum State: String, Codable {
+enum StateDTO: String, Codable {
     case implemented
 }
 
-//MARK - Assignee
-struct Assignee: Codable, Equatable {
+//MARK: - Assignee
+struct AssigneeDTO: Codable, Equatable {
     let assignee: String
     let id: String
     let link: String // "https:\/\/bugs.swift.org\/browse\/SR-344",
@@ -71,13 +76,14 @@ struct Assignee: Codable, Equatable {
     let updated: String
 }
 
-//MARK - Warning
-struct Warning: Codable, Equatable {
+//MARK: - Warning
+struct WarningDTO: Codable, Equatable {
     let kind: String
     let message: String // "Missing review manager.",
     let stage: String //"parse"
 }
 
+//MARK: - Example JSON response
 /*
  
 # example Json

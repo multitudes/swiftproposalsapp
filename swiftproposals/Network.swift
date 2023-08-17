@@ -12,9 +12,9 @@ enum NetworkingError: Error {
     case invalidURL
 }
 
-func fetchProposals() -> some Publisher<[Proposal], Error> {
+func fetchProposals() -> some Publisher<[ProposalDTO], Error> {
     
-    guard let url = Proposal.dataURL else {
+    guard let url = ProposalDTO.dataURL else {
         return Fail(error: NetworkingError.invalidURL)
             .eraseToAnyPublisher()
     }
@@ -23,7 +23,7 @@ func fetchProposals() -> some Publisher<[Proposal], Error> {
         .shared
         .dataTaskPublisher(for: url)
         .map(\.data)
-        .decode(type: [Proposal].self, decoder: JSONDecoder())
+        .decode(type: [ProposalDTO].self, decoder: JSONDecoder())
         .print("data")
         .eraseToAnyPublisher()
 }
